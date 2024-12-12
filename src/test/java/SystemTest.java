@@ -7,6 +7,12 @@ import org.junit.jupiter.api.Test;
 class SystemTest {
 
 	@Test
+	void shoudIdentifyObjectHashCode() {
+		Object dummy = new Object();
+		assertEquals(dummy.hashCode(), System.identityHashCode(dummy));
+	}
+
+	@Test
 	void shouldReturnEnvVariable() {
 		assertEquals("vitorlegalvh@gmail.com", System.getenv("GMAIL_USERNAME"));
 	}
