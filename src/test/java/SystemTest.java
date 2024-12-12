@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Map;
 import java.util.Properties;
@@ -36,6 +37,11 @@ class SystemTest {
 		assertEquals(properties, System.getProperties());
 	}
 
+	@Test
+	void shouldReturnSystemPropertyByKey() {
+		assertEquals("/home/vitor", System.getProperty("user.home"));
+	}
+
 	@SuppressWarnings("removal")
 	@Test
 	void securityManagerShouldBeNull() {
@@ -43,8 +49,9 @@ class SystemTest {
 	}
 
 	@Test
-	void shoudIdentifyObjectHashCode() {
+	void shoudNotIdentifyObjectHashCode() {
 		Object dummy = new Object();
-		assertEquals(dummy.hashCode(), System.identityHashCode(dummy));
+		Object ymmud = new Object();
+		assertNotEquals(ymmud.hashCode(), System.identityHashCode(dummy));
 	}
 }
