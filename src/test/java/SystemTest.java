@@ -20,18 +20,6 @@ class SystemTest {
 	}
 
 	@Test
-	void shouldReturnSystemProperties() {
-		Properties properties = System.getProperties();
-		assertEquals(properties, System.getProperties());
-	}
-
-	@Test
-	void shoudIdentifyObjectHashCode() {
-		Object dummy = new Object();
-		assertEquals(dummy.hashCode(), System.identityHashCode(dummy));
-	}
-
-	@Test
 	void shouldReturnEnvVariable() {
 		assertEquals("vitorlegalvh@gmail.com", System.getenv("GMAIL_USERNAME"));
 	}
@@ -40,5 +28,23 @@ class SystemTest {
 	void shouldReturnEnvVariables() {
 		Map<String, String> env = System.getenv();
 		assertEquals(env, System.getenv());
+	}
+
+	@Test
+	void shouldReturnSystemProperties() {
+		Properties properties = System.getProperties();
+		assertEquals(properties, System.getProperties());
+	}
+
+	@SuppressWarnings("removal")
+	@Test
+	void securityManagerShouldBeNull() {
+		assertEquals(null, System.getSecurityManager());
+	}
+
+	@Test
+	void shoudIdentifyObjectHashCode() {
+		Object dummy = new Object();
+		assertEquals(dummy.hashCode(), System.identityHashCode(dummy));
 	}
 }
