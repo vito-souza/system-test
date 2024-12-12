@@ -21,6 +21,13 @@ class SystemTest {
 	}
 
 	@Test
+	void currentTimeMilisShouldNotBeEqual() throws InterruptedException {
+		long millis = System.currentTimeMillis();
+		Thread.sleep(1);
+		assertNotEquals(millis, System.currentTimeMillis());
+	}
+
+	@Test
 	void shouldReturnSystemEnvVariable() {
 		assertEquals("vitorlegalvh@gmail.com", System.getenv("GMAIL_USERNAME"));
 	}
