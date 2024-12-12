@@ -42,6 +42,11 @@ class SystemTest {
 		assertEquals("/home/vitor", System.getProperty("user.home"));
 	}
 
+	@Test
+	void systemPropertyByKeyAndDefShouldNotEqualDefault() {
+		assertNotEquals("dummy", System.getProperty("user.home", "dummy"));
+	}
+
 	@SuppressWarnings("removal")
 	@Test
 	void securityManagerShouldBeNull() {
