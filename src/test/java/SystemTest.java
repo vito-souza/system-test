@@ -6,9 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.Map;
 import java.util.Properties;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SystemTest {
+
+	Properties properties;
+
+	@BeforeEach
+	void init() {
+		properties = System.getProperties();
+	}
+
+	@AfterEach
+	void tearDown() {
+		System.setProperties(properties);
+	}
 
 	@Test
 	void shouldCopySubArrayCorrectly() {
@@ -100,6 +114,18 @@ class SystemTest {
 	void shouldSetProperty() {
 		System.setProperty("user.foo", "deu");
 		assertNotNull(System.getProperty("user.foo"));
+	}
 
+	@Test
+	void shouldSetProperties() {
+		Properties properties = new Properties();
+		properties.putAll(System.getProperties());
+
+		Properties newProperties = new Properties();
+		newProperties.setProperty("user.pokemon", "pikachu");
+
+		System.setProperties(newProperties);
+
+		assertNotEquals(properties, System.getProperties());
 	}
 }
