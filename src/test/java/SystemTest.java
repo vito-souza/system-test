@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,13 +27,12 @@ class SystemTest {
 
 	@Test
 	void shouldCopySubArrayCorrectly() {
-		char[] array = { 'u', 't', 'o', 'p', 'i', 'a' };
+		char[] pikachu = { 'p', 'i', 'k', 'a', 'c', 'h', 'u' };
 		char[] copy = new char[3];
-		char[] top = { 't', 'o', 'p' };
+		char[] chu = { 'c', 'h', 'u' };
 
-		System.arraycopy(array, 1, copy, 0, 3);
-
-		assertArrayEquals(copy, top);
+		System.arraycopy(pikachu, 4, copy, 0, 3);
+		assertArrayEquals(copy, chu);
 	}
 
 	@Test
@@ -55,14 +55,18 @@ class SystemTest {
 
 	@Test
 	void shouldReturnSystemEnvVariables() {
-		Map<String, String> env = System.getenv();
+		Map<String, String> env = new HashMap<String, String>();
+		env.putAll(System.getenv());
+
 		assertEquals(env, System.getenv());
 	}
 
 	@Test
 	void shouldReturnSystemProperties() {
-		Properties props = System.getProperties();
-		assertEquals(props, System.getProperties());
+		Properties properties = new Properties();
+		properties.putAll(System.getProperties());
+
+		assertEquals(properties, System.getProperties());
 	}
 
 	@Test
@@ -125,7 +129,6 @@ class SystemTest {
 		newProperties.setProperty("user.pokemon", "pikachu");
 
 		System.setProperties(newProperties);
-
 		assertNotEquals(properties, System.getProperties());
 	}
 }
