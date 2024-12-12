@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,6 +45,12 @@ class SystemTest {
 	void shouldClearSystemProperty() {
 		System.setProperty("dummy.property", "hello!");
 		assertEquals("hello!", System.clearProperty("dummy.property"));
+	}
+
+	@Test
+	void shouldReturnConsoleAssociatedWithCurrentJvm() {
+		Console console = System.console();
+		assertEquals(console.hashCode(), System.console().hashCode());
 	}
 
 	@Test
@@ -160,7 +167,7 @@ class SystemTest {
 
 	@Test
 	void shouldSetProperty() {
-		System.setProperty("user.foo", "deu");
-		assertNotNull(System.getProperty("user.foo"));
+		System.setProperty("user.ghost", "lick");
+		assertNotNull(System.getProperty("user.ghost"));
 	}
 }
