@@ -21,12 +21,12 @@ class SystemTest {
 	}
 
 	@Test
-	void shouldReturnEnvVariable() {
+	void shouldReturnSystemEnvVariable() {
 		assertEquals("vitorlegalvh@gmail.com", System.getenv("GMAIL_USERNAME"));
 	}
 
 	@Test
-	void shouldReturnEnvVariables() {
+	void shouldReturnSystemEnvVariables() {
 		Map<String, String> env = System.getenv();
 		assertEquals(env, System.getenv());
 	}
@@ -54,9 +54,31 @@ class SystemTest {
 	}
 
 	@Test
+	void shoudIdentifyObjectHashCode() {
+		Object dummy = new Object();
+		assertEquals(dummy.hashCode(), System.identityHashCode(dummy));
+	}
+
+	@Test
 	void shoudNotIdentifyObjectHashCode() {
 		Object dummy = new Object();
 		Object ymmud = new Object();
 		assertNotEquals(ymmud.hashCode(), System.identityHashCode(dummy));
+	}
+
+	@Test
+	void shoulReturnUnixLineSeparator() {
+		assertEquals("\n", System.lineSeparator());
+	}
+
+	@Test
+	void shouldNotReturnWindosLineSeparator() {
+		assertNotEquals("\r\n", System.lineSeparator());
+	}
+
+	@Test
+	void nanoTimeShouldNotBeEqual() {
+		long millis = System.nanoTime();
+		assertNotEquals(millis, System.nanoTime());
 	}
 }
