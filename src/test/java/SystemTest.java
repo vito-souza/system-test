@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
 import java.util.Properties;
@@ -93,5 +94,12 @@ class SystemTest {
 	void nanoTimeShouldNotBeEqual() {
 		long millis = System.nanoTime();
 		assertNotEquals(millis, System.nanoTime());
+	}
+
+	@Test
+	void shouldSetProperty() {
+		System.setProperty("user.foo", "deu");
+		assertNotNull(System.getProperty("user.foo"));
+
 	}
 }
