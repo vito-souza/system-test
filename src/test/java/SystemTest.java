@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
+import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,12 @@ class SystemTest {
 		System.arraycopy(array, 1, copy, 0, 3);
 
 		assertArrayEquals(copy, top);
+	}
+
+	@Test
+	void shouldReturnSystemProperties() {
+		Properties properties = System.getProperties();
+		assertEquals(properties, System.getProperties());
 	}
 
 	@Test
