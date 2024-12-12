@@ -21,6 +21,12 @@ class SystemTest {
 	}
 
 	@Test
+	void shouldClearSystemProperty() {
+		System.setProperty("dummy.property", "hello!");
+		assertEquals("hello!", System.clearProperty("dummy.property"));
+	}
+
+	@Test
 	void currentTimeMilisShouldNotBeEqual() throws InterruptedException {
 		long millis = System.currentTimeMillis();
 		Thread.sleep(1);
@@ -40,8 +46,8 @@ class SystemTest {
 
 	@Test
 	void shouldReturnSystemProperties() {
-		Properties properties = System.getProperties();
-		assertEquals(properties, System.getProperties());
+		Properties props = System.getProperties();
+		assertEquals(props, System.getProperties());
 	}
 
 	@Test
