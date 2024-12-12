@@ -3,6 +3,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -115,9 +120,30 @@ class SystemTest {
 	}
 
 	@Test
-	void shouldSetProperty() {
-		System.setProperty("user.foo", "deu");
-		assertNotNull(System.getProperty("user.foo"));
+	void shouldSetSystemErr() throws FileNotFoundException {
+		PrintStream err = System.err;
+		PrintStream newErr = new PrintStream(new FileOutputStream("dummy.txt"));
+
+		System.setErr(newErr);
+		assertNotEquals(err, System.err);
+	}
+
+	@Test
+	void shouldSetSystemIn() throws FileNotFoundException {
+		InputStream in = System.in;
+		InputStream newIn = new FileInputStream("dummy.txt");
+
+		System.setIn(newIn);
+		assertNotEquals(in, System.in);
+	}
+
+	@Test
+	void shouldSetSystemOut() throws FileNotFoundException {
+		PrintStream out = System.out;
+		PrintStream newOut = new PrintStream(new FileOutputStream("dummy.txt"));
+
+		System.setOut(newOut);
+		assertNotEquals(out, System.out);
 	}
 
 	@Test
@@ -130,5 +156,11 @@ class SystemTest {
 
 		System.setProperties(newProperties);
 		assertNotEquals(properties, System.getProperties());
+	}
+
+	@Test
+	void shouldSetProperty() {
+		System.setProperty("user.foo", "deu");
+		assertNotNull(System.getProperty("user.foo"));
 	}
 }
